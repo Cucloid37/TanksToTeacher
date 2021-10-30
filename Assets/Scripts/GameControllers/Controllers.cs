@@ -9,7 +9,7 @@ namespace TANKS.Start
         private readonly List<ILateExecute> _lateExecutes;
         private readonly List<ICleanup> _cleanups;
 
-        private const int CapacityList = 8;
+        private const int CapacityList = 18;
         
         public Controllers()
         {

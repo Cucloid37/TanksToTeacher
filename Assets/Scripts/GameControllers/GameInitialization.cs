@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace TANKS.Start
 {
     public sealed class GameInitialization
@@ -8,6 +10,9 @@ namespace TANKS.Start
             var inputInitialization = new InputInitialization();
             controllers.Add(inputInitialization);
             controllers.Add(new InputController(inputInitialization.GetInput()));
+
+            var factory = new GameObject("Factory").AddComponent<Factory>();
+            
 
         }
     }
