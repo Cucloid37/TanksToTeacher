@@ -1,26 +1,50 @@
+using System;
 using System.Collections.Generic;
+using TANKS.Start;
+using UnityEngine;
 
 namespace TANKS
 {
-    public class MoveController
+    public class MoveController : ICleanup
     {
-        private List<IDoIt> _speaker;
-        private List<IShoot> _shooter;
+
+        private IUserInputProxy _inputSpace;
+        
+        private readonly List<TankController> _playerTank;
+
+        private readonly List<TankController> _enemyTank;
 
 
-        public MoveController()
+        public MoveController((IUserInputProxy InputHorizonta, IUserInputProxy InputVertical, IUserInputProxy InputSpace) input,
+            List<TankController> playerTank, List<TankController> enemyTank)
         {
+            _inputSpace = input.InputSpace;
+            _playerTank = playerTank;
+            _enemyTank = enemyTank;
+            _inputSpace.AxisOnChang += MoveAll;
+        }
+        
+        
+        public void MoveAll(float f)
+        {
+            var target = new Vector3();
             
+            foreach (var unit in _playerTank)
+            {
+                unit.Shoot(target);
+            }
+            
+            // #TODO сделать паузу
+
+            foreach (var unit in _enemyTank)
+            {
+                unit.Shoot(target);
+            }
         }
 
-        internal MoveController Add(IDoIt speaker)
+        public void Cleanup()
         {
-            if (speaker is IShoot shoot)
-            {
-                _shooter.Add(shoot);
-            }
-
-            return this;
+            // inputSpace.AxisOnChang -= MoveAll;
         }
     }
 }

@@ -1,21 +1,17 @@
 using System;
+using UnityEngine;
 
 namespace TANKS
 {
-    public interface IShoot
+    public interface IShoot : IDoIt
     {
         // #TODO входные параметры
-        void Shoot();
+        void Shoot(Vector3 target);
     }
     
     public interface IDoIt
     {
-        event Action<int> OnTriggerEnterChange;
-        
-        int Initiative { get; }
         bool ICanMove { get; set; }
-        
-        void SetInitiative(int value);
     }
     
 }

@@ -14,10 +14,10 @@ namespace TANKS
         
         public void Initialization()
         {
-            foreach (var variable in _getActionObjects)
+            /*foreach (var variable in _getActionObjects)
             {
                 variable.OnTriggerEnterChange += 
-            }    
+            }    */
         }
     }
 }

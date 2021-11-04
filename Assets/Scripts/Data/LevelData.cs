@@ -1,15 +1,20 @@
+using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using UnityEngine;
 
 namespace TANKS.Start
 {
-    [CreateAssetMenu(fileName = "TanksData", menuName = "Data/Data/Tanks")]
-    public class TanksData : ScriptableObject
+    [CreateAssetMenu(fileName = "LevelData", menuName = "Data/Data/Level")]
+    public sealed class LevelData : ScriptableObject
     {
         [SerializeField] private string _pathToPrefab;
+        [SerializeField] private List<Vector3> _spawnPoints;
+        [SerializeField] private List<Vector3> _spawnPlayerPoints; 
         private GameObject _prefab;
-        
+
+        public List<Vector3> SpawnPoints => _spawnPoints;
+        public List<Vector3> SpawnPlayer => _spawnPlayerPoints;
         
         public GameObject Prefab
         {

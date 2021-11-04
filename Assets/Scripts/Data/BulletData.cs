@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace TANKS.Start
 {
-    [CreateAssetMenu(fileName = "TanksData", menuName = "Data/Data/Tanks")]
-    public class TanksData : ScriptableObject
+    [CreateAssetMenu(fileName = "BulletData", menuName = "Data/Data/BulletData")]
+    public class BulletData : ScriptableObject
     {
         [SerializeField] private string _pathToPrefab;
         private GameObject _prefab;

@@ -1,24 +1,26 @@
 using System;
+using TANKS.Start;
+using UnityEngine;
 
 namespace TANKS
 {
-    public class TankController
+    public class TankController : IShoot
     {
-        // #TODO
-        // Обмозговать, какие входные параметры; 
-        // Свойства - bool, List?
-        // Обмозговать методы
+        public bool ICanMove { get; set; }
         
         private TankModel _model;
+        private IBulletFactory _factory;
+        private GameObject _bullet;
 
-        public TankController(TankModel model, TankView view)
+        public TankController(TankModel model, IBulletFactory factory)
         {
             _model = model;
+            _factory = factory;
         }
         
         // #TODO void GetDamage()
         // 
-        public void GetDamage()
+        public void GetDamage(TankModel attackerModel)
         {
             
         }
@@ -26,10 +28,11 @@ namespace TANKS
         
         // #TODO void Shoot()
         // 
-        public void Shoot()
+        public void Shoot(Vector3 target)
         {
-            
+            _bullet = _factory.CreateBullet(_model);
+            _bullet.GetComponent<BulletView>().Move(target);
         }
-        
+
     }
 }

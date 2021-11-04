@@ -4,41 +4,40 @@ namespace TANKS.Start
 {
     public class InputInitialization : IInitialization
     {
-        private IUserInputProxy _userInputLeft;
-        private IUserInputProxy _userInputRight;
         private IUserInputProxy _userInputHorizontal;
         private IUserInputProxy _userInputVertical;
+        private IUserInputProxy _userInputSpace;
 
-        /// <summary>
-        /// Инициализируем мышь под устройство
-        /// </summary>
-        public void Initialization()
+        public InputInitialization()
         {
             if (Application.platform == RuntimePlatform.Android)
             {
-                _userInputLeft = new MobileInput();     // На данный момент ничего не передаёт
-                _userInputRight = new MobileInput();
+                // #TODO
+                // реализовать под мобильное, но это далеко не срочно
+                
                 _userInputHorizontal = new MobileInput();
-                _userInputVertical = new MobileInput();   //
+                _userInputVertical = new MobileInput();
+                _userInputSpace = new MobileInput();
                 return;
             }
-
-            _userInputLeft = new PCUserInputLeft();
-            _userInputRight = new PCUserInputRight();
+            
             _userInputHorizontal = new PCUserInputHorizontal();
             _userInputVertical = new PCUserInputVertical();
+            _userInputSpace = new PCUSerInputSpace();
+            
+        }
+        
+        public void Initialization()
+        {
+            
 
         }
         
         
-        /// <summary>
-        /// Передаем две мыши в GetInput
-        /// </summary>
-        /// <returns></returns>
-        public (IUserInputProxy InputLeft, IUserInputProxy IputRight, IUserInputProxy InputHorizonta, IUserInputProxy InputVertical) GetInput()
+        public (IUserInputProxy InputHorizonta, IUserInputProxy InputVertical, IUserInputProxy InputSpace) GetInput()
         {
-            (IUserInputProxy userInputLeft, IUserInputProxy userInputRight, IUserInputProxy InputHorizonta, IUserInputProxy InputVertical) 
-                result = (_userInputLeft, _userInputRight, _userInputHorizontal, _userInputVertical);
+            (IUserInputProxy InputHorizonta, IUserInputProxy InputVertical, IUserInputProxy InputSpace) 
+                result = (_userInputHorizontal, _userInputVertical, _userInputSpace);
             return result;
         }
     }

@@ -7,10 +7,29 @@ namespace TANKS
     {
         // #TODO
         // Я сейчас вообще не помню, как вешается событие на анимацию и вообще работу с анимацией
-        public event Action<bool> IHaveDamage; 
-        private Animation _animationDamage;
+
+        private TankController _controller;
+        private Animator _animationDamage;
+        private Vector3 _myPosition;
+        public Vector3 MyPosition => _myPosition;
         
-        public void AnimationPlay()
+        
+        
+        public void Start()
+        {
+            _myPosition = gameObject.transform.position;
+            _animationDamage = gameObject.GetComponent<Animator>();
+        }
+
+        // #TODO Анимация не сделана
+        public void AnimationPlay(TankModel model)
+        {
+            _animationDamage.Play("NewAnimation");
+            _controller.GetDamage(model);
+            
+        }
+
+        public void SetController()
         {
             
         }

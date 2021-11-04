@@ -2,26 +2,24 @@ namespace TANKS.Start
 {
     public class InputController : IExecute
     {
-        private readonly IUserInputProxy _mouseRight;
-        private readonly IUserInputProxy _mouseLeft;
         private readonly IUserInputProxy _horizontal;
         private readonly IUserInputProxy _vertical;
+        private readonly IUserInputProxy _space;
 
 
-        public InputController((IUserInputProxy Right, IUserInputProxy Left, IUserInputProxy Horizontal, IUserInputProxy Vertical) input)
+        public InputController((IUserInputProxy Horizontal, IUserInputProxy Vertical, IUserInputProxy Space) input)
         {
-            _mouseRight = input.Right;
-            _mouseLeft = input.Left;
+           
             _horizontal = input.Horizontal;
             _vertical = input.Vertical;
+            _space = input.Space;
         }
 
         public void Execute(float deltaTime)
         {
-            _mouseRight.GetAxis();
-            _mouseLeft.GetAxis();
             _horizontal.GetAxis();
             _vertical.GetAxis();
+            _space.GetAxis();
         }
     }
 }

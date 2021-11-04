@@ -9,7 +9,7 @@ namespace TANKS.Start
         private readonly List<ILateExecute> _lateExecutes;
         private readonly List<ICleanup> _cleanups;
 
-        private const int CapacityList = 18;
+        private const int CapacityList = 88;
         
         public Controllers()
         {
@@ -48,6 +48,7 @@ namespace TANKS.Start
         {
             for (int index = 0; index < _initializeControllers.Count; index++)
             {
+
                 _initializeControllers[index].Initialization();
             }
         }

@@ -4,12 +4,15 @@ using UnityEngine;
 
 namespace TANKS
 {
-    public sealed class BulletView : MonoBehaviour
+    public sealed class BulletView : MonoBehaviour, ICleanup
     {
-        public event Action<int> OnTriggerEnterChange; 
-        private GameObject _bullet;
+        private TankModel _model;
 
-       
+        public void SetTankModel(TankModel model)
+        {
+            _model = model;
+        }
+
         // #TODO 
         public void Move(Vector3 position)
         {
@@ -18,11 +21,18 @@ namespace TANKS
         
         private void OnTriggerEnter(Collider other)
         {
-            OnTriggerEnterChange?.Invoke(other.gameObject.GetInstanceID());
+            if (other == GetComponent<TankView>().gameObject.GetComponent<Collider>())
+            {
+                other.GetComponent<TankView>().AnimationPlay(_model);
+            }
         }
         
         // #TODO уничтожить объект 
         // Не помню как правильно уничтожать
 
+        public void Cleanup()
+        {
+            
+        }
     }
 }
