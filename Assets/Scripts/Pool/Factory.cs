@@ -2,50 +2,25 @@ using System;
 using System.Reflection;
 using Abstractions.Pool;
 using Tanks;
-using Tanks.Models;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 namespace Pool
 {
-    public abstract class Factory<T> : MonoBehaviour where T : IPoolable
+    public abstract class Factory<T> where T : IPoolable
     {
-        protected readonly Descriptions _descriptions;
+        private Descriptions _descriptions;
+        protected MonoFactory _instantiate;
         public Func<IPool<T>, T> Method;
 
-        public Factory(Descriptions descriptions)
+        public virtual void Init(Descriptions descriptions, MonoFactory factory)
         {
             _descriptions = descriptions;
+            _instantiate = factory;
             Method += FactoryPoolMethod;
         }
-        
+
         protected abstract T FactoryPoolMethod(IPool<T> pool);
 
-    }
-
-    public class BulletFactory<T> : Factory<T> where T : IBullet
-    {
-        private readonly BulletDescription description;
-        private readonly Transform container = new GameObject("ContainerBullet").transform;
-        
-        public BulletFactory(Descriptions descriptions) : base(descriptions)
-        {
-            description = descriptions.Bullet;
-        }
-
-        protected override T FactoryPoolMethod(IPool<T> pool)
-        {
-            var view = Instantiate
-                    (description.Prefab, description.PoolPosition.position, Quaternion.identity, container).
-                AddComponent<BulletView>();
-            IBullet bullet = new Bullet(view);
-
-            return (T)bullet;
-        }
-    }
-
-
-    public class BulletView : MonoBehaviour
-    {
-        
     }
 }

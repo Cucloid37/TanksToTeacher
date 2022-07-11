@@ -10,10 +10,10 @@ namespace Tanks
         private MainMenuController _mainMenuController;
         private BattleController _battleController;
         
-        public StateController(InputController input, PrefabManager manager)
+        public StateController(InputController input)
         {
             _input = input;
-            _manager = manager;
+            // _manager = manager;
             _profilePlayer = new ProfilePlayer();
             
             _profilePlayer.CurrentState.SubscribeOnChange(OnChangeGameState);

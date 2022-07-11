@@ -8,6 +8,5 @@ namespace Core.Component
         private bool isAlive;
 
         public bool IsAlive { get => isAlive; set => isAlive = value; }
-        public IEntity Owner { get; set; }
     }
 }

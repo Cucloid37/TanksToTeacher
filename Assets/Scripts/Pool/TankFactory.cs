@@ -8,9 +8,10 @@ namespace Pool
     public class TankFactory<T> : Factory<T> where T : ITankController
     {
         private TanksDescriptions description;
-        
-        public TankFactory(Descriptions descriptions) : base(descriptions)
+
+        public override void Init(Descriptions descriptions, MonoFactory factory)
         {
+            base.Init(descriptions, factory);
             description = descriptions.Tanks;
         }
 

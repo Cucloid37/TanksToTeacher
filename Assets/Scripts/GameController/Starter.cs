@@ -19,17 +19,17 @@ namespace Tanks
 
         private void Update()
         {
-            updateControllers.Execute(Time.deltaTime);
+            // updateControllers.Execute(Time.deltaTime);
         }
 
         private void FixedUpdate()
         {
-            updateControllers.LateExecute(Time.deltaTime);
+            // updateControllers.LateExecute(Time.deltaTime);
         }
 
         private void OnDisable()
         {
-            updateControllers.Cleanup();
+            // updateControllers.Cleanup();
         }
     }
 }
